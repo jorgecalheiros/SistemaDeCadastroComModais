@@ -1,0 +1,71 @@
+﻿@using SistemaDeCadastroComModais.ViewModels;
+@model List<ClienteViewModel>
+@{
+    ViewData["Title"] = "Clientes";
+}
+<h1>@ViewData["Title"]</h1>
+<br/>
+<div class="container">
+    <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modal-create-cliente" data-bs-url="@Url.Action($"Criar")">
+        Adicionar um cliente
+    </button>
+    @await Html.PartialAsync("Partials/CriarClienteViewPartial", new ClienteViewModel())
+    @{
+        if (TempData["MessageError"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["MessageError"]
+            </div>
+        }
+
+        if (TempData["MessageSuccess"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["MessageSuccess"]
+            </div>
+        }
+    }
+    <table class="table mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach(ClienteViewModel cliente in Model)
+                {
+                    <tr>
+                        <td>@cliente.Id</td>
+                        <td>@cliente.Name</td>
+                        <td>@cliente.Email</td>
+                        <td>@cliente.Telefone</td>
+                        <td class="d-flex gap-2">
+                            <button 
+                                class="btn btn-primary" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="@($"#modal-edit-cliente-id-{cliente.Id}")"
+                            >
+                                Editar
+                            </button>
+                            @await Html.PartialAsync("Partials/EditarClienteViewPartial", cliente)
+                            <button 
+                                class="btn btn-danger" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="@($"#modal-delete-cliente-id-{cliente.Id}")"
+                            >
+                                Excluir
+                            </button>
+                            @await Html.PartialAsync("Partials/ConfirmarExcluirClienteViewPartial",cliente)
+                        </td>
+                    </tr>
+                }    
+            }
+        </tbody>
+    </table>
+</div>

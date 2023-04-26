@@ -1,0 +1,39 @@
+﻿@model SistemaDeCadastroComModais.ViewModels.ClienteViewModel;
+
+<div class="modal fade" id="modal-create-cliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar um cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" asp-controller="Cliente" asp-action="Criar" method="post">
+                    <div class="col-md-6">
+                        <label for="input-name" class="form-label">Nome</label>
+                        <input type="text" name="name" class="form-control" id="input-name" asp-for="Name" />
+                        <span class="text-danger" asp-validation-for="Name"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="input-email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="input-email" asp-for="Email" />
+                        <span class="text-danger" asp-validation-for="Email"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="input-telefone" class="form-label">Telefone</label>
+                        <input type="number" class="form-control" id="input-telefone" asp-for="Telefone" maxlength="9" />
+                        <span class="text-danger" asp-validation-for="Telefone"></span>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

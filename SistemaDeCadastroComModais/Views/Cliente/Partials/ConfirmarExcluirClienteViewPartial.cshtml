@@ -1,0 +1,32 @@
+﻿@using SistemaDeCadastroComModais.ViewModels;
+@model ClienteViewModel;
+
+<div class="modal fade" id="modal-delete-cliente-id-@Model.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Excluir o cliente(@Model.Name)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" asp-controller="Cliente" asp-action="Delete" method="post">
+                    <div>
+                        <input asp-for="Id" hidden />
+                        <strong><p class="text-danger">Você tem certeza em excluir esse cliente?</p></strong>
+                        <div>
+                            <strong>Nome:</strong>@Model.Name<br/>
+                            <strong class="my-2">Email:</strong>@Model.Email<br/>
+                            <strong>Telefone:</strong>@Model.Telefone
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-danger" asp-controller="Cliente" asp-action="Delete">Confirmar</button>
+                    </div>
+             </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
